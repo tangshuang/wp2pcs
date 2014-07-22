@@ -52,6 +52,7 @@ function wp_diff_to_pcs_action(){
 		// 更新文件列表和游标
 		wp_diff_to_pcs_update_file_list();
 		delete_option('wp_diff_to_pcs_local_files_cursor');
+    delete_option('wp_diff_to_pcs_last_time');
     wp2pcs_clean_redirect('#wp-to-pcs-diff-form');
   }
   // 开启增量备份定时任务
@@ -105,17 +106,18 @@ function wp_diff_to_pcs_update_file_list(){
       unset($local_files[$key]);
     }
   }
-	//update_option('wp_diff_to_pcs_local_files',$local_files);
 	$local_files_record = trailing_slash_path(WP2PCS_TMP_PATH,IS_WIN).'local_files.php';
 	if(file_exists($local_files_record))@unlink($database_file);
 	$handle = @fopen($local_files_record,"w+");
 	array_unshift($local_files,'<?php /**');
 	array_push($local_files,'**/');
-	if(fwrite($handle,"\xEF\xBB\xBF".implode("\n",$local_files)) === false){
+	if(fwrite($handle,implode("\n",$local_files)) === false){
 		wp_die("写入文件 local_files.php 失败");
 		exit();
 	}
 	fclose($handle);
+  // 记录最后一次更新的时间
+  update_option('wp_diff_to_pcs_last_time',time());
 	return $local_files;
 }
 
@@ -134,6 +136,7 @@ function wp_diff_to_pcs_corn_function(){
 	$local_files = explode("\n",$local_files);
 	if(!$local_files){
 		$local_files = wp_diff_to_pcs_update_file_list();
+    update_option('wp_diff_to_pcs_last_time',0);
 	}
 	array_shift($local_files);
 	array_pop($local_files);
@@ -153,7 +156,6 @@ function wp_diff_to_pcs_corn_function(){
         wp_diff_to_pcs_update_file_list();
 			}
 			update_option('wp_diff_to_pcs_local_files_cursor',$diff_cursor);
-      update_option('wp_diff_to_pcs_last_time',time());
 			wp_diff_to_pcs_corn_function();
 			return;
 		}
@@ -165,8 +167,8 @@ function wp_diff_to_pcs_corn_function(){
 			$file_local_dir = dirname($file_path);
 			$remote_dir = get_real_uri(WP2PCS_REMOTE_ROOT_PATH.'/'.$file_local_dir);
 			$remote_dir = trailing_slash_path($remote_dir);
-			// 文件大于2M的时候，用分片上传
-			if($file_size > 2*1024*1024){
+			// 文件大于20M的时候，用分片上传
+			if($file_size > 20*1024*1024){
 				$file_blocks = array();
 				$handle = @fopen($local_file,'rb');
 				while(!@feof($handle)){
@@ -196,12 +198,10 @@ function wp_diff_to_pcs_corn_function(){
       wp_diff_to_pcs_update_file_list();
 		}
 		update_option('wp_diff_to_pcs_local_files_cursor',$diff_cursor);
-    update_option('wp_diff_to_pcs_last_time',time());
 	}
 	// 如果已经游玩了，那么就重新检查目录
 	else{
 		update_option('wp_diff_to_pcs_local_files_cursor',0);
-		update_option('wp_diff_to_pcs_last_time',time());
 		wp_diff_to_pcs_update_file_list();
 		wp_diff_to_pcs_corn_function();
 		return;

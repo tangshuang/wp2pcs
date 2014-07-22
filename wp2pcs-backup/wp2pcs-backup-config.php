@@ -11,4 +11,4 @@ if(!defined('CAN_WRITE'))define('CAN_WRITE',is_really_writable(WP2PCS_TMP_PATH))
 if(!defined('IS_WIN'))define('IS_WIN',strpos(PHP_OS,'WIN')!==false);
 
 // 当你发现自己错过了很多定时任务时，可以帮助你执行没有执行完的定时任务
-//if(is_admin())define('ALTERNATE_WP_CRON',true);
+if(is_admin())define('ALTERNATE_WP_CRON',true);

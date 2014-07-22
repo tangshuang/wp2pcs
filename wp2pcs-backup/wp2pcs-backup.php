@@ -185,7 +185,7 @@ function wp2pcs_pannel(){
 			<div class="inside" style="border-bottom:1px solid #CCC;margin:0;padding:8px 10px;">
 				<p>官方网站：<a href="http://www.wp2pcs.com" target="_blank">http://www.wp2pcs.com</a></p>
 				<p>官方QQ交流群：292172954 <a href="http://shang.qq.com/wpa/qunwpa?idkey=97278156f3def92eef226cd5b88d9e7a463e157655650f4800f577472c219786" target="_blank"><img title="WP2PCS官方交流群" alt="WP2PCS官方交流群" src="http://pub.idqqimg.com/wpa/images/group.png" border="0" /></a></p>
-				<p>向插件作者捐赠：BitCoin（14r1iUQYRPaYDnNH9Q1xnzwn4Vj93mv1na）</p>
+				<p>向插件作者捐赠：BitCoin（14r1iUQYRPaYDnNH9Q1xnzwn4Vj93mv1na）、个人博客（<a href="http://www.tangshuang.net" target="_blank">www.tangshuang.net</a>）</p>
 			</div>
 			<div class="inside" style="border-bottom:1px solid #CCC;margin:0;padding:8px 10px;">
 				<p><b>最新动态</b></p>

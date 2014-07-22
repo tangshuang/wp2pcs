@@ -303,14 +303,14 @@ function wp_backup_to_pcs_send_single_file($local_path,$remote_dir){
 }
 
 // 超大文件分片上传函数
-function wp_backup_to_pcs_send_super_file($local_path,$remote_dir,$file_block_size){
+function wp_backup_to_pcs_send_super_file($local_path,$remote_dir){
 	global $BaiduPCS;
 	$file_name = basename($local_path);
 	
 	$file_blocks = array();//分片上传文件成功后返回的md5值数组集合
 	$handle = @fopen($local_path,'rb');
 	while(!@feof($handle)){
-		$file_block_content = fread($handle,$file_block_size);
+		$file_block_content = fread($handle,2*1024*1024);
 		$temp = $BaiduPCS->upload($file_block_content,trailing_slash_path($remote_dir),$file_name,false,true);
 		if(!is_array($temp)){
 			$temp = json_decode($temp,true);
@@ -330,9 +330,9 @@ function wp_backup_to_pcs_send_super_file($local_path,$remote_dir,$file_block_si
 function wp_backup_to_pcs_send_file($local_path,$remote_dir){
 	$file_name = basename($local_path);
 	$file_size = get_real_filesize($local_path);
-	$file_max_size = 2*1024*1024;
+	$file_max_size = 20*1024*1024;
 	if($file_size > $file_max_size){
-		wp_backup_to_pcs_send_super_file($local_path,$remote_dir,$file_max_size);
+		wp_backup_to_pcs_send_super_file($local_path,$remote_dir);
 	}else{
 		wp_backup_to_pcs_send_single_file($local_path,$remote_dir);
 	}
