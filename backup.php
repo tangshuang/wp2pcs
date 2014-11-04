@@ -11,6 +11,12 @@ require("libs/BaiduPCS.class.php");
 if(!file_exists(dirname(__FILE__).'/config.php')) die('请创建config.php文件');
 include("config.php");
 
+// 如果目录不可写
+if(!is_really_writable(dirname(__FILE__))) {
+  die('当前目录不可写，请赋予可写权限。');
+}
+
+
 /*
  * 下面开始自动备份
  */
@@ -154,4 +160,30 @@ function curl($url,$post = false){
   $result = curl_exec($ch);
   curl_close($ch);
   return $result;
+}
+
+// 判断目录或文件是否有可写权限
+function is_really_writable($file){
+  $file = trim($file);
+  // WIN，是否开启安全模式
+  if(DIRECTORY_SEPARATOR == '/' AND @ini_get("safe_mode") == false){
+    return is_writable($file);
+  }
+  // 如果是目录的话
+  if(is_dir($file)){
+    $file = rtrim($file, '/').'/'.md5(mt_rand(1,100).mt_rand(1,100));
+    if(($fp = @fopen($file,'w+')) === false){
+      return FALSE;  
+    }
+    fclose($fp);
+    @chmod($file,'0755');
+    @unlink($file);
+    return true;
+  }
+  // 如果是不是文件，或文件打不开的话
+  elseif(!is_file($file) OR ($fp = @fopen($file,'w+')) === false){
+    return false;
+  }
+  fclose($fp);
+  return true;
 }
