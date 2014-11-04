@@ -49,7 +49,7 @@ do{
       $doTime = strtotime(date('Y-m-d 02:00:00'));
     }
     $nextRunTime = $doTime - $nowTime;
-    rename($run_file,str_replace('run.open.'.$run_times,'run.open.'.($run_times+1),$run_file));// 修改开关文件名，下一次执行的时候根据文件名来判定是否继续执行。为什么要修改文件名呢？因为我可以知道被执行了多少次。
+    rename($run_file,str_replace('run.open.'.$run_times,'run.open.'.($run_times+1),$run_file));// 修改开关文件名，下一次执行的时候根据文件名来判定是否继续执行。为什么要修改文件名呢？因为我可以知道被执行了多少次。而且还有一个功能，防止被别人执行，你第一次执行之后这个文件的名称变了，别人发现你使用了wp2pcs，想帮你备份，没门
     $run_times ++;
     sleep($nextRunTime);
 }while(true);
