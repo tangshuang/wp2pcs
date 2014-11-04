@@ -3,7 +3,7 @@
 /*
  * 这个文件是用来调用资源的，例如你想调用你网盘 /我的应用数据/wp2pcs/images/1.jpg，那么你只需要使用yoursiteurl/wp2pcs/?images/1.jpg就可以显示这张图片
  * 当你开启了重写，还可以通过重写规则，实现直接用yoursiteurl/images/1.jpg访问图片
- * 访问视频比较特殊，1.必须使用.m3u8作为视频的访问后缀，如yoursiteurl/images/1.mp4.m3u8，2.要播放视频必须使用wp2pcs官方提供的播放器代码，因为百度云规定必须要加入开发者的接口id信息，否则无法播放，播放器代码请到www.wp2pcs.com查找，下次我会把地址写在这里。
+ * 访问视频比较特殊，1.必须使用.m3u8作为视频的访问后缀，如yoursiteurl/wp2pcs/index.php/video/1.mp4.m3u8，2.要播放视频必须使用wp2pcs官方提供的播放器代码，因为百度云规定必须要加入开发者的接口id信息，否则无法播放，播放器代码请到www.wp2pcs.com查找，下次我会把地址写在这里。
  * 注意，不再支持其他参数，例如你不要用yoursiteurl/images/1.jpg?test=1这样的URL来显示图片，如果你一定要这样做，请联系我深入开发
  * 联系 否子戈 http://www.utubon.com
  */
@@ -21,8 +21,19 @@ $uri_arr = array_values(array_filter($uri_arr));
 if($uri_arr[0] == 'wp2pcs') {
   array_shift($uri_arr);
 }
-// 如果是使用默认的URL模式，也就是yoursiteurl/wp2pcs/?images/1.jpg，那么要去掉?，最终得到了文件在远程目录中的路径
+
+// 把URI连接起来
 $path = implode('/',$uri_arr);
+////// 访问的形式多种多样，例如重写开启之后可以domain/image/test.jpg，也可能是domain/wp2pcs/?image/test.jpg，也可能是domain/wp2pcs/index.php/video/test.mp4.m3u8，还有可能是domain/wp2pcs/index.php?images/test.jpg等等形式，总之千奇百怪都可能出现。
+// 如果开始使用了index.php那么要去掉
+if(strpos($post,'index.php') == 0) {
+  $path = substr($path,9);
+}
+// 如果去除了index.php还有/呢
+if(strpos($path,'/') == 0) {
+  $path = substr($path,1);
+}
+// 如果是使用默认的URL模式，也就是yoursiteurl/wp2pcs/?images/1.jpg，那么要去掉?，最终得到了文件在远程目录中的路径
 if(strpos($path,'?') == 0) {
   $path = substr($path,1);
 }
