@@ -14,11 +14,6 @@ if(!file_exists(dirname(__FILE__).'/config.php')) die('请创建config.php文件
 include("config.php");
 
 $current_uri = urldecode($_SERVER["REQUEST_URI"]);
-// 如果URL根本就没得东西，就跳转到wp2pcs官方主页，算是给我们打个小广告吧
-if(!$current_uri || $current_uri == '/'){
-  header("Location: http://www.wp2pcs.com ");
-}
-
 $uri_arr = explode('/',$current_uri);
 $uri_arr = array_values(array_filter($uri_arr));
 
@@ -30,6 +25,12 @@ if($uri_arr[0] == 'wp2pcs') {
 $path = implode('/',$uri_arr);
 if(strpos($path,'?') == 0) {
   $path = substr($path,1);
+}
+
+// 如果URL根本就没得东西，就跳转到wp2pcs官方主页，算是给我们打个小广告吧
+if(!$path || $path == '/'){
+  header("Location: http://www.wp2pcs.com ");
+  exit;
 }
 
 // 利用上面拿到的path构建远程目录中的文件
