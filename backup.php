@@ -96,7 +96,7 @@ function run_backup() {
 function upload_baidupcs($zip_file_path){
   $file_blocks = array();//分片上传文件成功后返回的md5值数组集合
   $file_block_size = 2*1024*1024;// 2M
-  $rmote_dir = '/apps/wp2pcs/'.REMOTE_ROOT.'/backup/';
+  $rmote_dir = str_replace('//','/',REMOTE_ROOT.'/backup/');
   $file_name = basename($zip_file_path);
   $BaiduPCS = new BaiduPCS(BAIDU_TOKEN);
   // 开始分片上传
