@@ -1,16 +1,15 @@
-WP2PCS
-======
+# WP2PCS
 
-Web Push to Private Cloud Space 网络资源云端化解决方案
+A wordpress plugin to backup data and files to baidu cloud storage.
 
+## Install
 
+Search `wp2pcs` in plugins dashboard in your wordpress website, click `Install` to install this plugin.
 
-WP2PCS有两个功能，
-一个是从网站到云端，实现备份和数据同步，把你的网站文件、数据库等备份到网盘，以免网站数据丢失等意外，
-另一个功能是实现云端资源的调用，把网盘中的图片、视频、音乐等放到你的网站中使用，从而节约你的网站存储空间。
+## Active
 
-具体的使用方法，以及WordPress插件，请到官方主页获取详细信息：http://www.wp2pcs.com
+You need a baidu account.
 
+After your installing, go to menu `WP2PCS`, and click on ', and click on '百度授权' to get auth of baidupcs. If it success, go to '定时备份' to set schedule tasks.
 
-You can use wp2pcs to backup your website to baidu pcs, to avoid data missing. 
-At the same time, you can use pictures, mp3, video files on pcs in your website, in order to save storage space.
+Perhaps, you need google translate to get the meaning of Chinese words. Good luck!
