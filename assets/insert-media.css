@@ -1,0 +1,139 @@
+html,body {
+  background-color: #fff;
+  margin: 10px;
+}
+body {
+  padding-top: 40px;
+}
+.body-bottom {
+  height: 80px;
+}
+.clear {
+  clear: both;
+}
+
+#wp2pcs-insert-media-iframe-buttons {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  padding: 10px;
+  border-top: 1px solid #dedede;
+  width: 100%;
+  text-align: right;
+  z-index: 9999;
+  background-color: #fff;
+}
+#wp2pcs-insert-media-iframe-buttons .button {
+  margin-right: 5px;
+}
+#wp2pcs-insert-media-iframe-buttons #wp2pcs-insert-media-btn-insert {
+  margin-right: 30px;
+}
+#wp2pcs-insert-media-iframe-buttons .float-left {
+  float: left;
+}
+
+#wp2pcs-insert-media-iframe-topbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 30px;
+  line-height: 30px;
+  padding-left: 10px;
+  border-bottom: 1px solid #dedede;
+  width: 100%;
+  z-index: 9999;
+  background-color: #fff;
+}
+#wp2pcs-insert-media-iframe-place {
+  float: left;
+}
+#wp2pcs-insert-media-iframe-check {
+  float: right;
+  margin-right: 30px;
+}
+
+
+.file-on-pcs {
+  width: 150px;
+  height: 150px;
+  line-height: 150px;
+  overflow: hidden;
+  float: left;
+  margin: 5px;
+  border: #dedede solid 5px;
+  position: relative;
+  text-align: center;
+  background-color: #f9f9f9;
+  background-image: url(file-bg.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.file-on-pcs.file-type-dir {
+  background-color: #FFC125;
+  background-image: url(dir-bg.png);
+}
+.file-on-pcs.file-format-image {
+  background-image: url(image-bg.png);
+}
+.file-on-pcs.file-format-music {
+  background-image: url(music-bg.png);
+}
+.file-on-pcs.file-format-video {
+  background-image: url(video-bg.png);
+}
+.file-on-pcs:hover,
+.file-on-pcs.selected {
+  border: #1E8CBE solid 5px;
+}
+.file-on-pcs a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0px 0px 2px #999;
+}
+.file-on-pcs input {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}
+.file-on-pcs img {
+  width: 100%;
+  height: 100%;
+}
+
+#wp2pcs-insert-media-iframe-help {
+  display: none;
+}
+#wp2pcs-insert-media-iframe-upload {
+  position: fixed;
+  left: 0;
+  bottom: 50px;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-y: hidden;
+  background: url(loading.gif) no-repeat center;
+}
+#wp2pcs-insert-media-iframe-upload iframe {
+  width: 1100px;
+  height: 95%;
+  margin: 25px 0 0 -215px;
+}
+
+#wp2pcs-insert-media-iframe-pagenavi {
+  padding-top: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+#wp2pcs-insert-media-iframe-pagenavi a {
+  margin: 0 .5em;
+}
+#wp2pcs-insert-media-iframe-pagenavi img {
+  margin-top: 40px;
+}
