@@ -1,9 +1,9 @@
 <div class="wrap">
 
 <h2 class="nav-tab-wrapper">
-  <a href="<?php menu_page_url('wp2pcs-setting'); ?>" class="nav-tab">基本信息</a>
+  <a href="<?php echo add_query_arg('tab','general',$page_url); ?>" class="nav-tab">基本信息</a>
   <a href="javascript:void(0);" class="nav-tab nav-tab-active">定时备份</a>
-  <a href="<?php echo add_query_arg('tab','load',menu_page_url('wp2pcs-setting',false)); ?>" class="nav-tab">资源调用</a>
+  <a href="<?php echo add_query_arg('tab','load',$page_url); ?>" class="nav-tab">资源调用</a>
 </h2>
 
 <div class="metabox-holder"><div class="meta-box-sortables">
@@ -22,7 +22,7 @@
       $wp2pcs_backup_file = get_option('wp2pcs_backup_file');
       $wp2pcs_backup_data = get_option('wp2pcs_backup_data');
       $wp2pcs_backup_time = get_option('wp2pcs_backup_time');
-      $reccurences_array = wp2pcs_more_reccurences_for_backup_array();
+      $reccurences_array = wp2pcs_reccurences();
       $backup_timestamp = wp_next_scheduled('wp2pcs_backup_cron_task');
       ?>
       文件：<select name="wp2pcs_backup_file">
@@ -70,7 +70,6 @@
 
 <button type="submit" class="button-primary">确定</button>
 <input type="hidden" name="action" value="update-backup-setting">
-<a href="<?php echo add_query_arg(array('action'=>'backup-now','_wpnonce'=>wp_create_nonce())); ?>" class="button">立即备份</a>
 <?php wp_nonce_field(); ?>
 
 </form>

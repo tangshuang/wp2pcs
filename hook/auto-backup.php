@@ -3,16 +3,8 @@
 // 增加schedule,自定义的时间间隔循环的时间间隔 每周一次和每两周一次
 add_filter('cron_schedules','wp2pcs_more_reccurences_for_backup');
 function wp2pcs_more_reccurences_for_backup($schedules){
-	$add_array = wp2pcs_more_reccurences_for_backup_array();
+	$add_array = wp2pcs_reccurences();
 	return array_merge($schedules,$add_array);
-}
-function wp2pcs_more_reccurences_for_backup_array(){
-	return array(
-		'never' => array('interval' => 0, 'display' => '永不备份'),
-		'daily' => array('interval' => 3600*24, 'display' => '每天一次'),
-		'weekly' => array('interval' => 3600*24*7, 'display' => '每周一次'),
-		'monthly' => array('interval' => 3600*24*30, 'display' => '每月一次')
-	);
 }
 
 add_action('wp2pcs_backup_cron_task','wp2pcs_backup_cron_task_function');
@@ -22,7 +14,7 @@ function wp2pcs_backup_cron_task_function() {
 
   $wp2pcs_backup_file = get_option('wp2pcs_backup_file');
   $wp2pcs_backup_data = get_option('wp2pcs_backup_data');
-  $reccurences_array = wp2pcs_more_reccurences_for_backup_array();
+  $reccurences_array = wp2pcs_reccurences();
   $backup_file = $reccurences_array[$wp2pcs_backup_file]['interval']/(3600*24);
   $backup_data = $reccurences_array[$wp2pcs_backup_data]['interval']/(3600*24);
 
@@ -44,8 +36,6 @@ function wp2pcs_backup_cron_task_function() {
   $wp2pcs_backup_amount ++;
   update_option('wp2pcs_backup_amount',$wp2pcs_backup_amount);
 
-  $zip_file = run_backup($backup_file,$backup_data);
-  upload_baidupcs($zip_file);
-  remove_dir(WP2PCS_TEMP_DIR,false);// 清空临时目录
+  wp2pcs_backup_to_baidupcs($backup_file,$backup_data);
 
 }

@@ -2,9 +2,9 @@
 
 /**
  * 百度云PHP SDK 公共网络交互类
- *
+ * 
  * 本文件百度云PHP版本SDK的公共网络交互功能
- *
+ * 
  * @author 百度移动·云事业部
  * @copyright Copyright (c) 2012-2020 百度在线网络技术(北京)有限公司
  * @version 2.0.1
@@ -540,7 +540,7 @@ class RequestCore {
         if ($this->debug_mode) {
             curl_setopt($curl_handle, CURLOPT_VERBOSE, true);
         }
-//[yangyh]
+//[yangyh]		
 // 		if (! ini_get ( 'safe_mode' )) {
 // 			//modify by zhengkan
 // 		//curl_setopt($curl_handle, CURLOPT_FOLLOWLOCATION, true);
@@ -840,5 +840,5 @@ class ResponseCore {
  * Default RequestCore Exception.
  */
 class RequestCore_Exception extends Exception {
-
+    
 }

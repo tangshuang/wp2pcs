@@ -3,7 +3,7 @@ Contributors: 否子戈
 Donate link: http://www.wp2pcs.com
 Tags:wp2pcs, 数据备份, 资源调用, baidu, cloud storage, PCS, 百度网盘
 Requires at least: 3.5.1
-Tested up to: 4.2
+Tested up to: 4.6.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -14,7 +14,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 把WordPress和云盘（PCS，个人云存储）连接在一起的插件。它的两项基本功能：将wordpress的数据库、文件<strong>定时自动备份</strong>到云盘，以防止由于过失而丢失了网站数据；把云盘作为网站的后备箱，<strong>存放</strong>图片、附件，解决网站空间不够用的烦恼，可以在网站内<strong>直接调用</strong>云盘上的文件。目前只支持百度云盘。
 
-官方网站 http://www.wp2pcs.com
+开发与探讨：http://github.com/tangshuang/WP2PCS
 使用中如有疑问请加官方唯一QQ群(292172954)参与讨论。
 技术问题请到官网查看文档，在对应的文档下方留言。
 
@@ -47,10 +47,10 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Changelog ==
 
-= 1.5.5 =
-主要解决php7不再支持老的mysql_connect操作的问题，改用pdo方式备份数据库
+= 1.6.0 =
+精简插件，成为一个轻量级的备份插件，删除广告、通知等不必要的功能，提供一个资源调用开关选项。
 
 == Upgrade Notice ==
 
-= 1.5.5 =
-主要解决php7不再支持老的mysql_connect操作的问题，改用pdo方式备份数据库
+= 1.6.0 =
+精简插件，成为一个轻量级的备份插件，删除广告、通知等不必要的功能，提供一个资源调用开关选项。

@@ -1,5 +1,8 @@
 <?php
 
+$wp2pcs_load_switch = get_option('wp2pcs_load_switch');
+if(!$wp2pcs_load_switch) return;
+
 /*
 *
 * # 这个文件是用来实现从百度网盘获取附件列表，并让站长可以选择插入到文章中
@@ -58,7 +61,7 @@ function wp2pcs_insert_media_iframe_content() {
     $dir_path = $_GET['dir'];
   }
   elseif(get_option('wp2pcs_load_remote_dir')) {
-    $dir_path = '/apps/wp2pcs/share';
+    $dir_path = WP2PCS_BAIDUPCS_SHARE_ROOT;
   }
   else{
     $dir_path = WP2PCS_BAIDUPCS_REMOTE_ROOT.'/load';
@@ -78,7 +81,7 @@ function wp2pcs_insert_media_iframe_content() {
   <div id="wp2pcs-insert-media-iframe-place">
   当前位置：
   <a href="<?php echo add_query_arg('dir',WP2PCS_BAIDUPCS_REMOTE_ROOT.'/load',remove_query_arg(array('paged','refresh'))); ?>" <?php if(strpos($dir_path,WP2PCS_BAIDUPCS_REMOTE_ROOT.'/load') === false)echo 'style="color:#ccc;text-decoration:line-through"'; ?>>站点目录</a><?php
-  if(strpos($dir_path,'/apps/wp2pcs/share') === false) {
+  if(strpos($dir_path,WP2PCS_BAIDUPCS_SHARE_ROOT) === false) {
     $current_path = str_replace(WP2PCS_BAIDUPCS_REMOTE_ROOT.'/load','',$dir_path);
     $current_path = array_filter(explode('/',$current_path));
     $place_path_arr = array();
@@ -90,15 +93,15 @@ function wp2pcs_insert_media_iframe_content() {
     }
   }
   ?>
-  | <a href="<?php echo add_query_arg('dir','/apps/wp2pcs/share',remove_query_arg(array('refresh','paged'))); ?>" <?php if(strpos($dir_path,'/apps/wp2pcs/share') === false)echo 'style="color:#ccc;text-decoration:line-through"'; ?>>共享目录</a><?php
-  if(strpos($dir_path,'/apps/wp2pcs/share') !== false) {
-    $current_path = str_replace('/apps/wp2pcs/share','',$dir_path);
+  | <a href="<?php echo add_query_arg('dir',WP2PCS_BAIDUPCS_SHARE_ROOT,remove_query_arg(array('refresh','paged'))); ?>" <?php if(strpos($dir_path,WP2PCS_BAIDUPCS_SHARE_ROOT) === false)echo 'style="color:#ccc;text-decoration:line-through"'; ?>>共享目录</a><?php
+  if(strpos($dir_path,WP2PCS_BAIDUPCS_SHARE_ROOT) !== false) {
+    $current_path = str_replace(WP2PCS_BAIDUPCS_SHARE_ROOT,'',$dir_path);
     $current_path = array_filter(explode('/',$current_path));
     $place_path_arr = array();
     if(!empty($current_path)) foreach($current_path as $dir) {
       $place_path_arr[] = $dir;
       $place_path_link = remove_query_arg(array('refresh','paged'));
-      $place_path_link = add_query_arg('dir','/apps/wp2pcs/share/'.implode('/',$place_path_arr),$place_path_link);
+      $place_path_link = add_query_arg('dir',WP2PCS_BAIDUPCS_SHARE_ROOT.'/'.implode('/',$place_path_arr),$place_path_link);
       echo ' &rsaquo; <a href="'.$place_path_link.'">'.$dir.'</a>';
     }
   }
@@ -106,8 +109,7 @@ function wp2pcs_insert_media_iframe_content() {
   </div>
   <div id="wp2pcs-insert-media-iframe-check">
     <?php if(get_option('wp2pcs_load_imglink')) { ?><label><input type="checkbox" id="wp2pcs-insert-media-iframe-check-imglink" checked> 图片带链接</label><?php } ?>
-    <?php if(get_option('wp2pcs_site_id') && get_option('wp2pcs_video_player')) { ?><label><input type="checkbox" id="wp2pcs-insert-media-iframe-check-videoplay" checked> 视频播放器</label><?php } ?>
-    <?php if(strpos($dir_path,'/apps/wp2pcs/share') === 0) { ?><input type="hidden" id="wp2pcs-insert-media-iframe-check-root-dir" value="share"><?php } ?>
+    <?php if(strpos($dir_path,WP2PCS_BAIDUPCS_SHARE_ROOT) === 0) { ?><input type="hidden" id="wp2pcs-insert-media-iframe-check-root-dir" value="share"><?php } ?>
   </div>
   <div class="clear"></div>
 </div>
@@ -137,7 +139,7 @@ function wp2pcs_insert_media_iframe_content() {
     $files_total_page = ceil($files_amount/$files_per_page);
     foreach($files_on_pcs as $file) {
       $file_path = str_replace(WP2PCS_BAIDUPCS_REMOTE_ROOT.'/load','',$file->path);
-      $file_path = str_replace('/apps/wp2pcs/share','',$file_path);
+      $file_path = str_replace(WP2PCS_BAIDUPCS_SHARE_ROOT,'',$file_path);
       $file_name = substr($file->path,strrpos($file->path,'/')+1);
       $file_type = $file->isdir === 0 ? strtolower(substr($file_name,strrpos($file_name,'.')+1)) : 'dir';
       if($file_type == 'dir') {
@@ -146,12 +148,9 @@ function wp2pcs_insert_media_iframe_content() {
       elseif(in_array($file_type,array('jpg','jpeg','png','gif','bmp'))) {
         $file_format = 'image';
       }
-      elseif(in_array($file_type,array('asf','avi','flv','mkv','mov','mp4','wmv','3gp','3g2','mpeg','rm','rmvb'))) {
-        $file_format = 'video';
-      }
-      elseif(in_array($file_type,array('mp3','ogg','wma','wav','mp3pro','mid','midi'))) {
-        $file_format = 'music';
-      }
+      // elseif(in_array($file_type,array('mp3','ogg','wma','wav','mp3pro','mid','midi'))) {
+      //   $file_format = 'music';
+      // }
       else {
         $file_format = 'file';
       }
@@ -167,10 +166,6 @@ function wp2pcs_insert_media_iframe_content() {
         if($file_format == 'image') {
           echo '<input type="checkbox" value="'.$file_url.'">';
           echo '<img src="'.$file_url.'" title="图片 '.$file_name.'">';
-        }
-        elseif($file_format == 'video') {
-          echo '<input type="checkbox" value="'.$file_url.'" data-video-path="'.$file_path.'" data-video-md5="'.$file->md5.'" data-site-id="'.$site_id.'">';
-          echo '<a title="视频 '.$file_name.'">'.$file_name.'</a>';
         }
         elseif($file_format == 'music') {
           echo '<input type="checkbox" value="'.$file_url.'" data-site-id="'.$site_id.'">';

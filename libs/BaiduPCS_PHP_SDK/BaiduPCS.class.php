@@ -318,8 +318,8 @@ class BaiduPCS {
 	 * @param string $path
 	 * @return 文件内容
 	 */
-	public function downloadStream($path,$headers = array()) {
-		$result = $this->_baseControl ( 'stream?method=download' . '&access_token=' . $this->_accessToken, array ('path' => $path ),'GET',$headers );
+	public function downloadStream($path) {
+		$result = $this->_baseControl ( 'stream?method=download' . '&access_token=' . $this->_accessToken, array ('path' => $path ) );
 		return $result;
 	}
 
