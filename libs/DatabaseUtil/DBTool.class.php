@@ -144,7 +144,8 @@ class DatabaseTool
     private function getDDL($table = '')
     {
         $sql = "SHOW CREATE TABLE `{$table}`";
-        $ddl = $this->query($sql)[0][1] . ';';
+        $results = $this->query($sql);
+        $ddl = $results[0][1] . ';';
         return $ddl;
     }
 
