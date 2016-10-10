@@ -5,6 +5,7 @@ define('WP2PCS_SITE_URL',substr(home_url(),strpos(home_url(),'://')+3));// 当�
 //define('ALTERNATE_WP_CRON',true);// 当你发现自己错过了很多定时任务时，可以帮助你执行没有执行完的定时任务
 
 define('WP2PCS_TEMP_DIR',dirname(__FILE__).DIRECTORY_SEPARATOR.'temp.dir');
+define('WP2PCS_CACHE_DIR',dirname(__FILE__).DIRECTORY_SEPARATOR.'cache.dir');
 define('WP2PCS_CACHE_EXPIRES','+30 days');// 附件在浏览器上的缓存过期时间，按照strtotime的写法写
 define('WP2PCS_URL_PREFIX','wp2pcs');// 附件调用的时候URL中的判定字符串
 

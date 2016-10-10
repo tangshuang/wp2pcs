@@ -42,29 +42,13 @@ jQuery(function($){
   // 点击帮助按钮
   $('#wp2pcs-insert-media-btn-help').on('click',function(){
     if($('#wp2pcs-insert-media-iframe-help').is(':hidden')) {
-      $('#wp2pcs-insert-media-iframe-content,#wp2pcs-insert-media-iframe-upload').hide();
+      $('#wp2pcs-insert-media-iframe-content').hide();
       $('#wp2pcs-insert-media-iframe-help').fadeIn(500);
     }
     else {
-      $('#wp2pcs-insert-media-iframe-help,#wp2pcs-insert-media-iframe-upload').hide();
+      $('#wp2pcs-insert-media-iframe-help').hide();
       $('#wp2pcs-insert-media-iframe-content').fadeIn(500);
     }
-  });
-  // 点击上传按钮
-  $('#wp2pcs-insert-media-btn-upload').on('click',function(e){
-    e.preventDefault();
-    var $this = $(this),
-        $upload_box = $('#wp2pcs-insert-media-iframe-upload');
-    if($upload_box.is(':hidden')) {
-      $('#wp2pcs-insert-media-iframe-content,#wp2pcs-insert-media-iframe-help').hide();
-      $upload_box.html('<iframe src="' + $this.attr('href') + '"></iframe>')
-      $upload_box.fadeIn(500);
-    }
-    else {
-      $('#wp2pcs-insert-media-iframe-help,#wp2pcs-insert-media-iframe-upload').hide();
-      $('#wp2pcs-insert-media-iframe-content').fadeIn(500);
-    }
-    return false;
   });
   // 点击文件区域
   $(document).on('click','#wp2pcs-insert-media-iframe-files .file-on-pcs:not(.file-type-dir)',function(e){
@@ -117,6 +101,7 @@ jQuery(function($){
   $('#wp2pcs-insert-media-btn-clear').click(function(){
     $('.file-on-pcs').removeClass('selected');
     $('.file-on-pcs input').prop('checked',false);
+    $('#wp2pcs-insert-media-btn-help').next('span.wp2pcs-insert-media-show-url').remove();
   });
   // 点击插入按钮
   $('#wp2pcs-insert-media-btn-insert').click(function(){
@@ -227,27 +212,29 @@ jQuery(function($){
         href = $this.attr('href'),
         loading = $this.attr('data-loading'),
         ajaxing = $this.attr('data-ajaxing');
-    $('#wp2pcs-insert-media-iframe-help,#wp2pcs-insert-media-iframe-upload').hide();
+    $('#wp2pcs-insert-media-iframe-help').hide();
     $('#wp2pcs-insert-media-iframe-content').fadeIn(500);
+
     if(ajaxing == 'true') return;
     $this.attr('data-ajaxing','true');
+
     $.ajax({
       url : href,
-      dataType : 'html',
       type : 'GET',
-      timeout : 10000,
+      dataType : 'html',
       beforeSend : function() {
         $body.html('<img src="' + loading + '" style="display:block;margin: 0 auto;margin-top: 10%;">');
       },
       success : function(data) {
-        var DATA = $(data),
-            DATA = $('<code></code>').append(DATA),
-            CONTENT = $('#wp2pcs-insert-media-iframe-content',DATA);
-        $body.html(CONTENT.html());
+        window.console.log(data);
+        var $data = $('<div></div>').append(data);
+        var content = $data.find('#wp2pcs-insert-media-iframe-content').html();
+        $body.html(content);
         $this.removeAttr('data-ajaxing');
       },
-      error : function() {
+      error : function(error) {
         $this.removeAttr('data-ajaxing');
+        window.console.log(error);
         var cf = confirm('连接超时，强制刷新？');
         if(cf) {window.location.reload(false);}
       }

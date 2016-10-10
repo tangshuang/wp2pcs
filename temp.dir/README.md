@@ -1,1 +1,1 @@
-when backup start, a zip file will be put here, after backup end, this file will be deleted.
+目录必须要有可写权限

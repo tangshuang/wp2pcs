@@ -4,7 +4,7 @@
 Plugin Name: WP2PCS
 Plugin URI: http://www.tangshuang.net/wp2pcs
 Description: 本插件帮助网站站长将网站和百度网盘连接，实现网站定时备份到云盘里。
-Version: 1.6.0
+Version: 1.6.1
 Author: 否子戈
 Author URI: http://www.tangshuang.net
 */
@@ -12,7 +12,10 @@ Author URI: http://www.tangshuang.net
 define('WP2PCS_PLUGIN_NAME',__FILE__);
 define('WP2PCS_PLUGIN_DIR',dirname(WP2PCS_PLUGIN_NAME));
 define('WP2PCS_PLUGIN_URL',plugins_url('',WP2PCS_PLUGIN_NAME));
-define('WP2PCS_PLUGIN_VERSION','1.5.6');
+
+require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+$plugin_data = get_plugin_data(WP2PCS_PLUGIN_NAME);
+define('WP2PCS_PLUGIN_VERSION',$plugin_data['Version']); // can be only used in admin
 
 date_default_timezone_set('PRC');
 

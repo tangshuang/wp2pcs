@@ -48,6 +48,8 @@ if(self != top) {
       <li>提供资源开关选项，不再任意消耗资源</li>
       <li>取消本地缓存，减少空间占用</li>
       <li>禁止视频调用，保障插件长期可用。</li>
+      <li>-----------------------</li>
+      <li>这个版本还修改了一些bug，使得插件在不同的主机上表现更多兼容性</li>
     </ul>
     <div class="center">
       <p>WP2PCS官网不再提供服务，如果在插件使用过程中有什么问题，可以进入<a href="http://github.com/tangshuang/WP2PCS">GitHub</a>提交issue。</p>

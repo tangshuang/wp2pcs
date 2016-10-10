@@ -50,7 +50,7 @@
       <h3 class="hndle">简要说明</h3>
       <div class="inside">
         <p>WP2PCS当前版本：<?php echo WP2PCS_PLUGIN_VERSION; ?></p>
-        <p>PHP版本：<?php echo PHP_VERSION; ?>（PHP7不再支持mysql_connect等老的mysql操作，请安装和使用pdo方式操作mysql）</p>
+        <p>PHP版本：<?php echo PHP_VERSION; ?>（注：PHP必须支持PDO方式操作MySQL）</p>
         <p>交流QQ群：<a href="http://shang.qq.com/wpa/qunwpa?idkey=97278156f3def92eef226cd5b88d9e7a463e157655650f4800f577472c219786" target="_blank">292172954</a></p>
         <p>作者：<a href="http://weibo.com/hz184" target="_blank">@否子戈</a>，点击<a href="http://www.tangshuang.net/wp2pcs" target="_blank">这里</a>获得支持</p>
         <p>向作者捐赠：支付宝<code>476206120@qq.com</code>，财付通<code>476206120</code>，只有你的支持，才能维持WP2PCS继续正常使用。</p>

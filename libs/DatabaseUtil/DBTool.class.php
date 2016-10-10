@@ -253,20 +253,21 @@ class DatabaseTool
         $sql = file_get_contents($path);
         $sql = explode("\r\n", $sql);
         //先消除--注释
-        $sql = array_filter($sql, function ($data)
-        {
-            if (empty($data) || preg_match('/^--.*/', $data))
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        });
+        $sql = array_filter($sql, array($this,'_array_filter'));
         $sql = implode('', $sql);
         //删除/**/注释
         $sql = preg_replace('/\/\*.*\*\//', '', $sql);
         return $sql;
+    }
+    private function _array_filter($data)
+    {
+        if (empty($data) || preg_match('/^--.*/', $data))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }
