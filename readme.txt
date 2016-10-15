@@ -1,6 +1,6 @@
 ﻿=== WP2PCS （WordPress连接到云盘） ===
 Contributors: 否子戈
-Donate link: http://www.wp2pcs.com
+Donate link: http://www.tangshuang.net/wp2pcs
 Tags:wp2pcs, 数据备份, 资源调用, baidu, cloud storage, PCS, 百度网盘
 Requires at least: 3.5.1
 Tested up to: 4.6.1

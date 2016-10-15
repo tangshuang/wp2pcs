@@ -37,7 +37,9 @@ function wp2pcs_rmdir($dir,$self = true) {
     }
   }
   closedir($handle);
-  if($self)rmdir($dir);
+  if($self) {
+      wp2pcs_rmdir($dir);
+  }
 }
 
 // 浏览器缓存
