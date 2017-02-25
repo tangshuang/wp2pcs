@@ -54,9 +54,7 @@ jQuery(function($){
         $child = $this.children(),
         file_url = $child.attr('data-url'),
         video_path = $child.attr('data-video-path'),
-        site_id = $child.attr('data-site-id'),
         is_vip = $('#wp2pcs-manage-media-page-check-vip').val();
-    if(site_id == undefined) site_id = '';
     $('#wp2pcs-manage-media-page-files .file-on-pcs').removeClass('selected');
     $this.addClass('selected');
     $file_info.find('.thumb').html('');
@@ -70,12 +68,12 @@ jQuery(function($){
     }
     else if(file_format == 'music') {
       $file_info.find('.format').text('音乐');
-      $file_info.find('.code').text('[audio src="' + file_url + '" poster="none" preload="none" loop="off" autoplay="off" data-site-id="' + site_id + '"]');
+      $file_info.find('.code').text('[audio src="' + file_url + '" poster="none" preload="none" loop="off" autoplay="off"]');
     }
     else if(file_format == 'video') {
       $file_info.find('.format').text('视频');
-      if(is_vip) $file_info.find('.code').text('<iframe class="wp2pcs-video-player" width="480" height="360" data-stretch="uniform" data-autostart="false" data-image="" data-path="' + video_path + '" data-site-id="' + site_id + '"' + (root_dir ? ' data-root-dir="' + root_dir + '"' : '') + ' scrolling="no" frameborder="0"></iframe>');
-      else $file_info.find('.code').text('[video width="" height="" src="' + file_url + '" poster="none" preload="none" loop="off" autoplay="off" data-site-id="' + site_id + '"]');
+      if(is_vip) $file_info.find('.code').text('<iframe class="wp2pcs-video-player" width="480" height="360" data-stretch="uniform" data-autostart="false" data-image="" data-path="' + video_path + '"' + (root_dir ? ' data-root-dir="' + root_dir + '"' : '') + ' scrolling="no" frameborder="0"></iframe>');
+      else $file_info.find('.code').text('[video width="" height="" src="' + file_url + '" poster="none" preload="none" loop="off" autoplay="off"]');
     }
     else {
       $file_info.find('.format').text('文件');
@@ -117,7 +115,7 @@ jQuery(function($){
         loading = $pagenavi.attr('data-loading'),
         ajaxing = $pagenavi.attr('data-ajaxing');
     if($pagenavi.length > 0 && scroll_top + screen_height + 100 > $pagenavi.offset().top && href != undefined) {
-    
+
     if(ajaxing == 'true') return;
     $pagenavi.attr('data-ajaxing','true');
     $.ajax({
@@ -145,7 +143,7 @@ jQuery(function($){
         $pagenavi.html('<a href="' + href + '" class="next-page">下一页</a>').removeAttr('data-ajaxing');
       }
     });
-    
+
     } // -- endif --
   });
   $(document).on('click','#wp2pcs-manage-media-page-pagenavi a.next-page',function(e){

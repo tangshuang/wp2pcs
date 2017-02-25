@@ -115,9 +115,7 @@ jQuery(function($){
             is_videoplay = $('#wp2pcs-insert-media-iframe-check-videoplay').prop('checked'),
             root_dir = $('#wp2pcs-insert-media-iframe-check-root-dir').val(),
             video_path = $input.attr('data-video-path'),
-            site_id = $input.attr('data-site-id'),
             url = $input.val();
-        if(site_id == undefined) site_id = '';
         // 如果被选择的是图片
         if($this.hasClass('file-format-image')){
           if(is_imglink) html += '<a href="' + url + '">';
@@ -127,16 +125,16 @@ jQuery(function($){
         // 如果是视频
         else if($this.hasClass('file-format-video')) {
           if(is_videoplay) {
-            html += '<iframe class="wp2pcs-video-player" width="480" height="360" data-stretch="uniform" data-autostart="false" data-image="" data-path="' + video_path + '" data-site-id="' + site_id + '"';
+            html += '<iframe class="wp2pcs-video-player" width="480" height="360" data-stretch="uniform" data-autostart="false" data-image="" data-path="' + video_path + '"';
             if(root_dir) html += ' data-root-dir="' + root_dir + '"';
             html += ' scrolling="no" frameborder="0"></iframe>';
           }
           else {
-            html += '[video width="" height="" src="' + url + '" poster="none" preload="none" loop="off" autoplay="off" data-site-id="' + site_id + '"]';
+            html += '[video width="" height="" src="' + url + '" poster="none" preload="none" loop="off" autoplay="off"]';
           }
         }
         else if($this.hasClass('file-format-music')) {
-          html += '[audio src="' + url + '" poster="none" preload="none" loop="off" autoplay="off" data-site-id="' + site_id + '"]';
+          html += '[audio src="' + url + '" poster="none" preload="none" loop="off" autoplay="off"]';
         }
         // 如果是其他文件，就直接给媒体链接
         else{
@@ -166,7 +164,7 @@ jQuery(function($){
         loading = $pagenavi.attr('data-loading'),
         ajaxing = $pagenavi.attr('data-ajaxing');
     if($pagenavi.length > 0 && scroll_top + screen_height + 100 > $pagenavi.offset().top && href != undefined) {
-    
+
     if(ajaxing == 'true') return;
     $pagenavi.attr('data-ajaxing','true');
     $.ajax({
@@ -194,7 +192,7 @@ jQuery(function($){
         $pagenavi.html('<a href="' + href + '" class="next-page">下一页</a>').removeAttr('data-ajaxing');
       }
     });
-    
+
     } // -- endif --
   });
   $(document).on('click','#wp2pcs-insert-media-iframe-pagenavi a.next-page',function(e){

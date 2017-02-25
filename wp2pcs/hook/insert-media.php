@@ -160,15 +160,15 @@ function wp2pcs_insert_media_iframe_content() {
       }
       else {
         $load_linktype = get_option('wp2pcs_load_linktype');
-        $site_id = get_option('wp2pcs_site_id');
-        $file_url = $load_linktype > 0 ? home_url('/wp2pcs'.$file_path) : home_url('?wp2pcs='.$file_path);
-        $file_url = $site_id && $load_linktype > 1 ? WP2PCS_APP_URL.'/'.$site_id.$file_path : $file_url;
+        $file_url = home_url('?'.WP2PCS_URL_PREFIX.'='.$file_path);
+        if($load_linktype > 0) $file_url = home_url('/'.WP2PCS_URL_PREFIX.$file_path);
+        if($load_linktype > 1) $file_url = WP2PCS_APP_URL.$file_path;
         if($file_format == 'image') {
           echo '<input type="checkbox" value="'.$file_url.'">';
           echo '<img src="'.$file_url.'" title="图片 '.$file_name.'">';
         }
         elseif($file_format == 'music') {
-          echo '<input type="checkbox" value="'.$file_url.'" data-site-id="'.$site_id.'">';
+          echo '<input type="checkbox" value="'.$file_url.'">';
           echo '<a title="音乐 '.$file_name.'">'.$file_name.'</a>';
         }
         else {

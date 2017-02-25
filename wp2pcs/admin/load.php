@@ -49,14 +49,20 @@ global $wp_rewrite;
     <p>
       <label>
       <input type="radio" name="wp2pcs_load_linktype" value="0" <?php checked($wp2pcs_load_linktype,0); ?>>
-      <?php echo home_url('/?wp2pcs=/img/test.jpg'); ?> （兼容性好，推荐）
+      <?php echo home_url('/?'.WP2PCS_URL_PREFIX.'=/img/test.jpg'); ?> （兼容性好，推荐）
       </label>
     </p>
     <p>
       <label>
       <input type="radio" name="wp2pcs_load_linktype" value="1" <?php checked($wp2pcs_load_linktype,1); ?> <?php if(!$wp_rewrite->permalink_structure) echo 'disabled'; ?>>
-      <?php echo home_url('/wp2pcs/img/test.jpg'); ?> <?php if(!$wp_rewrite->permalink_structure) echo '（重写未开）'; ?>
+      <?php echo home_url('/'.WP2PCS_URL_PREFIX.'/img/test.jpg'); ?> <?php if(!$wp_rewrite->permalink_structure) echo '（重写未开）'; ?>
       （需要重写支持）
+      </label>
+    </p>
+    <p>
+      <label>
+      <input type="radio" name="wp2pcs_load_linktype" value="2" <?php checked($wp2pcs_load_linktype,2); ?>>
+      <?php echo WP2PCS_APP_URL.'/img/test.jpg'; ?> （需要你在<?php echo WP2PCS_APP_URL; ?>架设static服务器）
       </label>
     </p>
   </div>
