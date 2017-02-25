@@ -10,12 +10,13 @@ define('WP2PCS_CACHE_EXPIRES','+30 days');// 附件在浏览器上的缓存过�
 define('WP2PCS_URL_PREFIX','wp2pcs');// 附件调用的时候URL中的判定字符串
 
 // 百度云
+define("WP2PCS_BAIDUPCS_REMOTE_DIR", "你的百度PCS应用APP的名称")
 define('WP2PCS_BAIDU_ACCESS_TOKEN',get_option('wp2pcs_baidu_access_token'));
-define('WP2PCS_BAIDUPCS_REMOTE_ROOT','/apps/wp2pcs/'.WP2PCS_SITE_URL);
-define('WP2PCS_BAIDUPCS_SHARE_ROOT','/apps/wp2pcs/share');
+define('WP2PCS_BAIDUPCS_REMOTE_ROOT','/apps/'.WP2PCS_BAIDUPCS_REMOTE_DIR.'/'.WP2PCS_SITE_URL);
+define('WP2PCS_BAIDUPCS_SHARE_ROOT','/apps/'.WP2PCS_BAIDUPCS_REMOTE_DIR.'/share');
 
 // API
-define('WP2PCS_API_URL','http://api.wp2pcs.tangshuang.net');
+define('WP2PCS_API_URL','http://你的授权服务器的域名');
 
 // 外链URL
-define('WP2PCS_APP_URL','http://wp2pcs.duapp.com');
+define('WP2PCS_APP_URL','http://你的外链服务器的域名');
