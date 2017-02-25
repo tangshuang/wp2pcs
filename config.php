@@ -15,7 +15,7 @@ define('WP2PCS_BAIDUPCS_REMOTE_ROOT','/apps/wp2pcs/'.WP2PCS_SITE_URL);
 define('WP2PCS_BAIDUPCS_SHARE_ROOT','/apps/wp2pcs/share');
 
 // API
-define('WP2PCS_API_URL','http://api.wp2pcs.com');
+define('WP2PCS_API_URL','http://api.wp2pcs.tangshuang.net');
 
 // 外链URL
 define('WP2PCS_APP_URL','http://wp2pcs.duapp.com');
