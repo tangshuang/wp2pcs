@@ -36,6 +36,8 @@
             }
             else{
               echo '<p>当前百度网盘总'.number_format(($quota->quota/(1024*1024)),2).'MB，剩余'.number_format((($quota->quota - $quota->used)/(1024*1024)),2).'MB。授权成功后请尽量不要切换账号授权，不同网盘之间切换会导致附件失效。</p>';
+              echo '<p>ACCESS TOKEN: '.WP2PCS_BAIDU_ACCESS_TOKEN.'</p>';
+              echo '<p>REFRESH TOKEN: '.WP2PCS_BAIDU_REFRESH_TOKEN.'</p>';
             }
           }
         ?>
